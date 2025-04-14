@@ -10,7 +10,7 @@ int main(){
     // pipe()로 만든 통로를 이용해서 부모가 데이터를 쓰고 자식이 읽는 구조야!
 
     int fd[2];      // 파이프를 사용할때 시스템이 만들어주는 파일 배열
-                    // 0읽는다. 1 쓴다. 한쪽은 쓰고 한쪽은 읽는 식이다. 
+                    // 0은 읽는다는 뜻. 1은 쓴다는. 한쪽은 쓰고 한쪽은 읽는 식이다. 
     char msg[] = "Hey child";
     char buf[100];  // 자식이 데이터를 받을 버퍼이다. 
 
@@ -19,9 +19,11 @@ int main(){
                 // 이 함수는 fd0, fd1에 읽기 쓰기 전용 파일 디스크립터를 만들어준다.
                 // 성공하면 0, 실패하면 -1을 리턴한다. 
 
+
     if(fork() == 0){
         read(fd[0], buf, sizeof(buf));  // 읽기
         printf("자식이 받은 메시지는 %s\n", buf);
+
     } else {
         // 부모 프로세스일 경우
         write(fd[1], msg, strlen(msg) + 1);
@@ -29,3 +31,25 @@ int main(){
 
     return 0;
 }
+
+// 정답 코드는 이것이다. 
+// #include <unistd.h>
+// #include <stdio.h>
+// #include <string.h>
+
+// int main() {
+//     int fd[2]; // fd[0] 읽기, fd[1] 쓰기
+//     char msg[] = "안녕, 자식 프로세스야!";
+//     char buf[100];
+
+//     pipe(fd); // 파이프 생성
+//     if (fork() == 0) {
+//         // 자식 프로세스
+//         read(fd[0], buf, sizeof(buf)); // 읽기
+//         printf("자식이 받은 메시지: %s\n", buf);
+//     } else {
+//         // 부모 프로세스
+//         write(fd[1], msg, strlen(msg)+1); // 쓰기
+//     }
+//     return 0;
+// }
