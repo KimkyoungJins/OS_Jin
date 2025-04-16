@@ -55,7 +55,8 @@ int main(){
     }
 
     // 4) sprintf를 이용해서 공유 메모리에 문자열을 차례대로 써넣는다.
-    sprintf(ptr, "%s", message0);
+    sprintf(ptr, "%s", message0);       // sprintf 메모리 버퍼에 써 넣을때 사용함. 
+
     ptr += strlen(message0);
 
     sprintf(ptr, "%s", message1);
