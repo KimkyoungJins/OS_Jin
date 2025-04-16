@@ -10,8 +10,7 @@
 
 int main()
 {
-    
-    const int SIZE = 4096;
+	const int SIZE = 4096;
 	const char *name = "OS";
 	const char *message0= "Studying ";
 	const char *message1= "Operating Systems ";
