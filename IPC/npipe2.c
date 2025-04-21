@@ -19,6 +19,7 @@ int main()
 	mkfifo(myfifo, 0666);
 
 	char str1[80], str2[80];
+    
 	while (1)
 	{
 		// First open in read only and read
@@ -36,5 +37,6 @@ int main()
 		write(fd1, str2, strlen(str2)+1);
 		close(fd1);
 	}
+    
 	return 0;
 }

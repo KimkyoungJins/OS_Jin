@@ -48,6 +48,7 @@ int main(void)
 		/* close the write end of the pipe */
 		close(fd[WRITE_END]);
 	}
+    
 	else { /* child process */
 		/* close the unused end of the pipe */
 		close(fd[WRITE_END]);
@@ -56,9 +57,9 @@ int main(void)
 		read(fd[READ_END], read_msg, BUFFER_SIZE);
 		printf("child read %s\n",read_msg);
 
+
 		/* close the write end of the pipe */
 		close(fd[READ_END]);
 	}
-
-	return 0;
+    	return 0;
 }
